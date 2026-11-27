@@ -6,10 +6,10 @@
   html {
     font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;
-    color: #1d1d1b;
+    color: #3a2a2e;
   }
   h1, h2, h3 {
-    font-family: 'Bodoni Moda', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, serif;
     letter-spacing: -0.01em;
   }
   .material-symbols-outlined {
@@ -21,8 +21,8 @@
   .btn {
     @apply inline-flex items-center justify-center gap-2 px-7 py-3 text-sm font-medium uppercase tracking-widest transition;
   }
-  .btn-dark { @apply bg-ink text-paper hover:bg-pine; }
-  .btn-outline { @apply border border-ink text-ink hover:bg-ink hover:text-paper; }
+  .btn-dark { @apply bg-pine text-white hover:bg-pine-dark rounded-full; }
+  .btn-outline { @apply border border-pine text-pine hover:bg-pine hover:text-white rounded-full; }
 }
 
 html { overflow-x: hidden; }

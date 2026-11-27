@@ -4,16 +4,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'paper': '#f6f3ee',        // fondo
-        'stone': '#e9e3d9',        // fondo alterno
-        'ink': '#1d1d1b',          // texto
-        'ink-soft': '#6b675f',
-        'pine': '#2f4a3a',         // acento principal
-        'pine-dark': '#223a2c',
-        'clay': '#c0603a',         // acento secundario (ofertas)
+        'paper': '#fdf7f5',        // fondo (blanco rosado)
+        'stone': '#f6e6e6',        // fondo alterno (rosa empolvado)
+        'ink': '#3a2a2e',          // texto
+        'ink-soft': '#7a6468',
+        'pine': '#c2577a',         // acento principal (rosa MiMi)
+        'pine-dark': '#a1405f',
+        'clay': '#d9466a',         // ofertas
+        'sage': '#8f9c7f',         // verde suave (flores)
       },
       fontFamily: {
-        'display': ['"Bodoni Moda"', 'Georgia', 'serif'],
+        'display': ['"Playfair Display"', 'Georgia', 'serif'],
+        'script': ['"Dancing Script"', 'cursive'],
         'sans': ['Inter', 'sans-serif'],
       },
     },

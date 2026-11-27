@@ -11,11 +11,11 @@ import { ProductoCard } from '../../components/producto-card/producto-card';
       <h1 class="text-4xl sm:text-5xl text-center">{{ categoria() || 'Toda la tienda' }}</h1>
 
       <div class="mt-8 flex flex-wrap justify-center gap-2">
-        <a routerLink="/tienda" class="px-4 py-2 text-xs uppercase tracking-widest border transition"
-           [class]="!categoria() ? 'bg-ink text-paper border-ink' : 'border-ink/30 hover:border-ink'">Todo</a>
+        <a routerLink="/tienda" class="px-4 py-2 rounded-full text-xs uppercase tracking-widest border transition"
+           [class]="!categoria() ? 'bg-pine text-white border-pine' : 'border-ink/30 hover:border-ink'">Todo</a>
         @for (c of categorias; track c) {
-          <a routerLink="/tienda" [queryParams]="{ categoria: c }" class="px-4 py-2 text-xs uppercase tracking-widest border transition"
-             [class]="categoria() === c ? 'bg-ink text-paper border-ink' : 'border-ink/30 hover:border-ink'">{{ c }}</a>
+          <a routerLink="/tienda" [queryParams]="{ categoria: c }" class="px-4 py-2 rounded-full text-xs uppercase tracking-widest border transition"
+             [class]="categoria() === c ? 'bg-pine text-white border-pine' : 'border-ink/30 hover:border-ink'">{{ c }}</a>
         }
       </div>
 
@@ -35,7 +35,7 @@ export class Tienda implements OnInit {
   private tienda = inject(TiendaService);
   private route = inject(ActivatedRoute);
 
-  categorias = ['Camisetas', 'Camisas', 'Pantalones', 'Sudaderas', 'Vestidos', 'Accesorios'];
+  categorias = ['Ropa', 'Abrigos y chaquetas', 'Pijamas', 'Calzado', 'Bolsos', 'MiMi Kids'];
   categoria = signal<string | null>(null);
   productos = signal<Producto[]>([]);
   error = signal(false);

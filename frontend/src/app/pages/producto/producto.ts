@@ -15,7 +15,7 @@ import { CarritoService } from '../../services/carrito.service';
         </a>
 
         <div class="mt-6 grid md:grid-cols-2 gap-10 lg:gap-16">
-          <div class="relative aspect-[3/4] overflow-hidden"
+          <div class="relative aspect-[3/4] overflow-hidden rounded-2xl"
                [style.background]="'linear-gradient(160deg,' + p.tonoA + ',' + p.tonoB + ')'">
             <span class="material-symbols-outlined absolute inset-0 grid place-items-center text-white/50"
                   style="font-size:180px; font-variation-settings:'wght' 100">checkroom</span>
@@ -46,7 +46,7 @@ import { CarritoService } from '../../services/carrito.service';
             <div class="mt-3 flex flex-wrap gap-2">
               @for (t of p.tallas; track t) {
                 <button (click)="talla.set(t)" class="min-w-12 px-3 h-11 border text-sm transition"
-                        [class]="talla() === t ? 'bg-ink text-paper border-ink' : 'border-ink/30 hover:border-ink'">{{ t }}</button>
+                        [class]="talla() === t ? 'bg-pine text-white border-pine' : 'border-ink/30 hover:border-ink'">{{ t }}</button>
               }
             </div>
             @if (faltaTalla()) {
@@ -60,8 +60,9 @@ import { CarritoService } from '../../services/carrito.service';
             }
 
             <ul class="mt-10 text-sm text-ink-soft space-y-2 border-t border-stone pt-6">
-              <li>• Envío gratis a partir de 50 €</li>
-              <li>• 30 días para cambios y devoluciones</li>
+              <li>• Envíos 24/48 h a península: 4,95 €</li>
+              <li>• Pago con tarjeta, Bizum o transferencia</li>
+              <li>• ¿Dudas con la talla? Escríbenos por <a href="https://www.instagram.com/mimi_modaycomplementos/" target="_blank" rel="noopener" class="underline">Instagram</a></li>
             </ul>
           </div>
         </div>

@@ -17,65 +17,69 @@ import org.springframework.web.bind.annotation.RestController;
 public class TiendaController {
 
     private static final TiendaInfo TIENDA = new TiendaInfo(
-            "MIMI moda y complementos",
-            "Ropa para todos los días, hecha para durar",
-            "Córdoba",
-            "hola@mimimoda.es",
-            "+34 600 000 000",
-            50.0,
-            List.of("Camisetas", "Camisas", "Pantalones", "Sudaderas", "Vestidos", "Accesorios"));
+            "MiMi moda y complementos",
+            "Moda para todas las tallas",
+            "",
+            "@mimi_modaycomplementos",
+            "",
+            0,
+            List.of("Ropa", "Abrigos y chaquetas", "Pijamas", "Calzado", "Bolsos", "MiMi Kids"));
 
-    private static final List<String> TALLAS = List.of("XS", "S", "M", "L", "XL");
+    // "Moda para todas las tallas"
+    private static final List<String> TALLAS = List.of("S", "M", "L", "XL", "XXL", "3XL");
+    private static final List<String> CALZADO = List.of("36", "37", "38", "39", "40", "41");
+    private static final List<String> KIDS = List.of("2", "4", "6", "8", "10", "12");
+    private static final List<String> UNICA = List.of("Única");
 
+    private static Producto.Color c(String nombre, String hex) {
+        return new Producto.Color(nombre, hex);
+    }
+
+    // Productos de ejemplo inspirados en lo que publica la tienda en Instagram.
+    // Precios orientativos: cámbialos por los reales.
     private static final List<Producto> PRODUCTOS = List.of(
-            new Producto(1, "Camiseta básica algodón", "Camisetas", 19.90, null,
-                    "Camiseta de algodón 100% peinado, corte regular y tacto suave. La que siempre acabas poniéndote.",
-                    List.of(new Producto.Color("Blanco roto", "#f1ece2"), new Producto.Color("Negro", "#1f1f1f"), new Producto.Color("Arena", "#d8c7a6")),
-                    TALLAS, false, true, "#e9e1d3", "#cfc3ad"),
-            new Producto(2, "Camiseta oversize estampada", "Camisetas", 24.90, 29.90,
-                    "Corte oversize, hombro caído y pequeño estampado en el pecho. Algodón grueso de 200 g.",
-                    List.of(new Producto.Color("Verde salvia", "#9aab8c"), new Producto.Color("Crudo", "#efe8da")),
-                    TALLAS, false, false, "#b7c4a8", "#8fa07f"),
-            new Producto(3, "Camisa de lino", "Camisas", 44.90, null,
-                    "Lino lavado que no pesa nada y mejora con cada lavado. Perfecta para el calor de Córdoba.",
-                    List.of(new Producto.Color("Azul cielo", "#a9c0d6"), new Producto.Color("Blanco", "#f6f3ec"), new Producto.Color("Terracota", "#c98262")),
-                    TALLAS, true, true, "#c3d3e2", "#9db6cc"),
-            new Producto(4, "Camisa Oxford", "Camisas", 39.90, null,
-                    "Oxford clásica con botones en el cuello. Del trabajo a la cena sin cambiarte.",
-                    List.of(new Producto.Color("Azul", "#8aa6c4"), new Producto.Color("Blanco", "#f6f3ec")),
-                    TALLAS, false, false, "#d6dfea", "#b3c4d8"),
-            new Producto(5, "Pantalón chino slim", "Pantalones", 49.90, null,
-                    "Chino de algodón elástico con corte slim. Cómodo todo el día.",
-                    List.of(new Producto.Color("Beige", "#cdb99a"), new Producto.Color("Marino", "#27364d"), new Producto.Color("Oliva", "#6f7650")),
-                    List.of("38", "40", "42", "44", "46"), false, true, "#d9c9ad", "#b9a37e"),
-            new Producto(6, "Vaquero recto", "Pantalones", 59.90, 69.90,
-                    "Vaquero de corte recto, tejido denim de 12 oz con lavado medio.",
-                    List.of(new Producto.Color("Azul medio", "#5b7391"), new Producto.Color("Negro", "#252525")),
-                    List.of("38", "40", "42", "44", "46"), false, false, "#8fa5bf", "#647c9b"),
-            new Producto(7, "Sudadera con capucha", "Sudaderas", 44.90, null,
-                    "Felpa suave por dentro, capucha doble y bolsillo canguro. Para las tardes de otoño.",
-                    List.of(new Producto.Color("Gris jaspe", "#b5b5b0"), new Producto.Color("Burdeos", "#6e2f3a"), new Producto.Color("Negro", "#1f1f1f")),
-                    TALLAS, true, true, "#c9c9c4", "#a0a09a"),
-            new Producto(8, "Sudadera cuello redondo", "Sudaderas", 39.90, null,
-                    "Cuello redondo y puños acanalados. Algodón orgánico con interior perchado.",
-                    List.of(new Producto.Color("Crudo", "#efe8da"), new Producto.Color("Verde botella", "#2f4a3a")),
-                    TALLAS, false, false, "#e6dccb", "#cdbfa6"),
-            new Producto(9, "Vestido midi camisero", "Vestidos", 54.90, null,
-                    "Vestido midi con botones y cinturón a la cintura. Tejido fluido que cae precioso.",
-                    List.of(new Producto.Color("Verde oliva", "#7a8461"), new Producto.Color("Azul tinta", "#2c3e5c")),
-                    TALLAS, true, true, "#a9b38d", "#7f8a64"),
-            new Producto(10, "Vestido de verano estampado", "Vestidos", 49.90, 59.90,
-                    "Vestido ligero con estampado floral y escote en V. Viscosa suave y fresquita.",
-                    List.of(new Producto.Color("Flores rosa", "#e4b6b0"), new Producto.Color("Flores azul", "#a9c0d6")),
-                    TALLAS, false, false, "#ecc9c4", "#d9a29b"),
-            new Producto(11, "Gorra de algodón", "Accesorios", 17.90, null,
-                    "Gorra de seis paneles con cierre ajustable. Bordado discreto en la parte frontal.",
-                    List.of(new Producto.Color("Beige", "#cdb99a"), new Producto.Color("Negro", "#1f1f1f")),
-                    List.of("Única"), false, false, "#ddd0b6", "#bda985"),
-            new Producto(12, "Cinturón de cuero", "Accesorios", 29.90, null,
-                    "Cinturón de piel con hebilla metálica mate. Dura años.",
-                    List.of(new Producto.Color("Marrón", "#6b4a32"), new Producto.Color("Negro", "#1f1f1f")),
-                    List.of("S", "M", "L"), false, true, "#a07956", "#6b4a32"));
+            new Producto(1, "Chaqueta corazón bordado", "Abrigos y chaquetas", 49.90, null,
+                    "Chaqueta oversize con corazón bordado en lentejuelas y estrellas. La prenda que todo el mundo nos pregunta.",
+                    List.of(c("Kaki", "#8b8a6e"), c("Negro", "#2a2a2a")), TALLAS, true, true, "#b7b49a", "#8b8a6e"),
+            new Producto(2, "Pantalón palazzo fluido", "Ropa", 32.90, null,
+                    "Palazzo de tiro alto con cinturón, tejido fluido que cae precioso. Combina con todo.",
+                    List.of(c("Verde salvia", "#9aa58a"), c("Beige", "#d9c7ad"), c("Negro", "#2a2a2a")), TALLAS, false, true, "#c3cbb4", "#9aa58a"),
+            new Producto(3, "Cárdigan de punto", "Ropa", 29.90, null,
+                    "Cárdigan de punto suave con botones, perfecto para entretiempo.",
+                    List.of(c("Rosa empolvado", "#e3b5c0"), c("Crudo", "#efe6d8"), c("Granate", "#7c2e3f")), TALLAS, true, true, "#f0cfd8", "#d9a0b0"),
+            new Producto(4, "Sudadera estrellas", "Ropa", 27.90, 34.90,
+                    "Sudadera de felpa con estrellas, cómoda y calentita.",
+                    List.of(c("Granate", "#7c2e3f"), c("Rosa", "#e3b5c0")), TALLAS, false, false, "#b46a7c", "#7c2e3f"),
+            new Producto(5, "Vaquero estampado", "Ropa", 35.90, null,
+                    "Vaquero recto con estampado, de los que alegran cualquier look.",
+                    List.of(c("Azul", "#4a5a7a")), TALLAS, false, false, "#7d8aa6", "#4a5a7a"),
+            new Producto(6, "Blusa fruncida", "Ropa", 22.90, null,
+                    "Blusa de manga larga con fruncido lateral que favorece muchísimo.",
+                    List.of(c("Chocolate", "#6b4a3a"), c("Negro", "#2a2a2a"), c("Blanco", "#f6f1ea")), TALLAS, false, true, "#a07e6c", "#6b4a3a"),
+            new Producto(7, "Abrigo paño", "Abrigos y chaquetas", 59.90, null,
+                    "Abrigo largo de paño con solapa, abriga sin pesar.",
+                    List.of(c("Camel", "#b48a5f"), c("Gris", "#8a8784")), TALLAS, true, false, "#d2b08b", "#b48a5f"),
+            new Producto(8, "Cazadora con tachuelas", "Abrigos y chaquetas", 44.90, 54.90,
+                    "Cazadora efecto piel con tachuelas plateadas. Rockera y elegante a la vez.",
+                    List.of(c("Negro", "#2a2a2a")), TALLAS, false, false, "#6b6b6b", "#2a2a2a"),
+            new Producto(9, "Pijama tundosado", "Pijamas", 24.90, null,
+                    "Pijama de dos piezas, suave por dentro, para las noches de invierno.",
+                    List.of(c("Rosa", "#eab8c6"), c("Gris", "#b6b4b4")), TALLAS, true, true, "#f2cdd8", "#d99fb2"),
+            new Producto(10, "Bailarinas de terciopelo", "Calzado", 25.90, null,
+                    "Bailarinas de terciopelo con elástico y suela de yute. Comodísimas.",
+                    List.of(c("Beige", "#cdb49b"), c("Verde", "#8c9a6a"), c("Burdeos", "#6e2f3a")), CALZADO, true, true, "#e0cdb9", "#cdb49b"),
+            new Producto(11, "Bolso de mano", "Bolsos", 26.90, null,
+                    "Bolso de mano con asa corta y bandolera desmontable.",
+                    List.of(c("Rosa", "#d993a7"), c("Negro", "#2a2a2a"), c("Dorado", "#c8a95c")), UNICA, false, false, "#e7b2c1", "#c07f86"),
+            new Producto(12, "Clutch de fiesta", "Bolsos", 19.90, null,
+                    "Clutch con cadena para bodas, comuniones y cenas especiales.",
+                    List.of(c("Plata", "#bfbfbf"), c("Dorado", "#c8a95c")), UNICA, false, false, "#e3d6b4", "#c8a95c"),
+            new Producto(13, "Conjunto niña sudadera + legging", "MiMi Kids", 21.90, null,
+                    "Conjunto cómodo para el cole y para jugar.",
+                    List.of(c("Rosa", "#eab8c6"), c("Lila", "#c7b2d8")), KIDS, true, true, "#d6e2cb", "#9cae8a"),
+            new Producto(14, "Pijama infantil", "MiMi Kids", 16.90, null,
+                    "Pijama suave y calentito para los peques.",
+                    List.of(c("Azul", "#a9c0d6"), c("Rosa", "#eab8c6")), KIDS, false, false, "#dbe5ef", "#a9c0d6"));
 
     @GetMapping("/tienda")
     public TiendaInfo tienda() {

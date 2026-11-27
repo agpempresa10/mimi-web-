@@ -43,10 +43,10 @@ import { CarritoService } from '../../services/carrito.service';
         </div>
 
         <div class="mt-8 ml-auto max-w-sm">
-          <div class="flex justify-between text-lg"><span>Total</span><span>{{ carrito.total() | currency: 'EUR' : 'symbol' : '1.2-2' }}</span></div>
-          <p class="text-xs text-ink-soft mt-1">
-            @if (carrito.total() >= 50) { Envío gratis incluido. } @else { Te faltan {{ 50 - carrito.total() | currency: 'EUR' : 'symbol' : '1.2-2' }} para el envío gratis. }
-          </p>
+          <div class="flex justify-between text-sm text-ink-soft"><span>Subtotal</span><span>{{ carrito.total() | currency: 'EUR' : 'symbol' : '1.2-2' }}</span></div>
+          <div class="flex justify-between text-sm text-ink-soft mt-1"><span>Envío 24/48 h (península)</span><span>{{ envio | currency: 'EUR' : 'symbol' : '1.2-2' }}</span></div>
+          <div class="flex justify-between text-lg mt-3 pt-3 border-t border-stone"><span>Total</span><span>{{ carrito.total() + envio | currency: 'EUR' : 'symbol' : '1.2-2' }}</span></div>
+          <p class="text-xs text-ink-soft mt-1">Pago con tarjeta, Bizum o transferencia.</p>
           <button class="btn btn-dark w-full mt-6" (click)="pagar()">Finalizar compra</button>
           @if (aviso) {
             <p class="mt-3 text-sm text-ink-soft">El pago todavía no está conectado: esta pantalla es solo la maqueta.</p>
@@ -60,6 +60,7 @@ import { CarritoService } from '../../services/carrito.service';
 export class Carrito {
   carrito = inject(CarritoService);
   aviso = false;
+  envio = 4.95;
 
   pagar() {
     this.aviso = true;
